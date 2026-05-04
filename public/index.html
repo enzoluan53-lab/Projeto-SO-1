@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard de Sistema - Fatec</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="page">
+    <header class="topbar">
+      <div class="brand">
+        <div class="logo">F</div>
+        <div>
+          <div class="brand-title">Fatec</div>
+          <div class="brand-subtitle">Faculdade de Tecnologia</div>
+        </div>
+      </div>
+      <div class="status-pill normal" id="system-status">NORMAL</div>
+    </header>
+
+    <section class="summary-row">
+      <article class="summary-card">
+        <span>RAM</span>
+        <strong id="summary-ram">0%</strong>
+      </article>
+      <article class="summary-card">
+        <span>CPU Média</span>
+        <strong id="summary-cpu">0%</strong>
+      </article>
+      <article class="summary-card">
+        <span>Uptime</span>
+        <strong id="summary-uptime">0m</strong>
+      </article>
+      <article class="summary-card">
+        <span>Arquivos</span>
+        <strong id="summary-files">0</strong>
+      </article>
+      <article class="summary-card">
+        <span>IP Principal</span>
+        <strong id="summary-ip">-</strong>
+      </article>
+      <article class="summary-card">
+        <span>Status</span>
+        <strong id="summary-status">NORMAL</strong>
+      </article>
+    </section>
+
+    <section class="cards-grid">
+      <div class="card card-large">
+        <h2>Sistema</h2>
+        <dl>
+          <dt>Host</dt><dd id="sys-host">-</dd>
+          <dt>SO</dt><dd id="sys-platform">-</dd>
+          <dt>Release</dt><dd id="sys-release">-</dd>
+          <dt>Plataforma</dt><dd id="sys-type">-</dd>
+          <dt>Arquitetura</dt><dd id="sys-arch">-</dd>
+          <dt>Endianness</dt><dd id="sys-endian">-</dd>
+          <dt>Node</dt><dd id="sys-node">-</dd>
+        </dl>
+      </div>
+
+      <div class="card card-large">
+        <h2>Usuário</h2>
+        <dl>
+          <dt>Usuário</dt><dd id="user-name">-</dd>
+          <dt>Home</dt><dd id="user-home">-</dd>
+          <dt>Temp</dt><dd id="user-temp">-</dd>
+          <dt>Shell</dt><dd id="user-shell">-</dd>
+          <dt>UID</dt><dd id="user-uid">-</dd>
+          <dt>GID</dt><dd id="user-gid">-</dd>
+        </dl>
+      </div>
+
+      <div class="card">
+        <h2>Memória RAM</h2>
+        <div class="stat-row"><span>Total</span><strong id="mem-total">-</strong></div>
+        <div class="stat-row"><span>Usada</span><strong id="mem-used">-</strong></div>
+        <div class="stat-row"><span>Livre</span><strong id="mem-free">-</strong></div>
+        <div class="stat-row"><span>Por CPU</span><strong id="mem-per-cpu">-</strong></div>
+        <div class="progress-bar"><div class="progress-fill" id="mem-progress"></div></div>
+      </div>
+
+      <div class="card">
+        <h2>CPU</h2>
+        <div class="stat-row"><span>Núcleos</span><strong id="cpu-cores">-</strong></div>
+        <div class="stat-row"><span>Modelo</span><strong id="cpu-model">-</strong></div>
+        <div class="stat-row"><span>Load Avg</span><strong id="cpu-load">-</strong></div>
+        <div id="cpu-cores-list"></div>
+      </div>
+
+      <div class="card card-large">
+        <h2>Rede</h2>
+        <div class="stat-row"><span>IP Principal</span><strong id="net-ip">-</strong></div>
+        <div class="interfaces" id="net-interfaces"></div>
+      </div>
+
+      <div class="card card-large">
+        <h2>Arquivos</h2>
+        <table>
+          <thead><tr><th>Nome</th><th>Tipo</th><th>Tamanho</th></tr></thead>
+          <tbody id="files-list"></tbody>
+        </table>
+      </div>
+
+      <div class="card card-large">
+        <h2>Tempo</h2>
+        <div class="stat-row"><span>Uptime</span><strong id="time-uptime">-</strong></div>
+        <div class="stat-row"><span>Timezone</span><strong id="time-zone">-</strong></div>
+        <div class="stat-row"><span>ISO</span><strong id="time-iso">-</strong></div>
+      </div>
+
+      <div class="card card-large">
+        <h2>Aplicação</h2>
+        <div class="stat-row"><span>PID</span><strong id="app-pid">-</strong></div>
+        <div class="stat-row"><span>Diretório</span><strong id="app-dir">-</strong></div>
+        <div class="stat-row"><span>Memória Node</span><strong id="app-mem">-</strong></div>
+        <div class="stat-row"><span>Exec Path</span><strong id="app-path">-</strong></div>
+      </div>
+
+      <div class="card card-large">
+        <h2>Ambiente</h2>
+        <div class="stat-row"><span>Status</span><strong id="env-status">-</strong></div>
+        <div class="stat-row"><span>PORT</span><strong id="env-port">-</strong></div>
+        <div class="stat-row"><span>NODE_ENV</span><strong id="env-node">-</strong></div>
+        <div class="stat-row"><span>Kernel AWS</span><strong id="env-aws">-</strong></div>
+      </div>
+    </section>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
