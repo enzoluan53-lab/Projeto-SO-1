@@ -1,15 +1,4 @@
-const formatBytes = bytes => {
-  const units = ["B", "KB", "MB", "GB", "TB"];
-  let index = 0;
-  let value = bytes;
-  while (value >= 1024 && index < units.length - 1) {
-    value /= 1024;
-    index++;
-  }
-  return `${value.toFixed(2)} ${units[index]}`;
-};
-
-const formatUptime = minutes => {
+﻿const formatUptime = minutes => {
   const days = Math.floor(minutes / 1440);
   const hours = Math.floor((minutes % 1440) / 60);
   const mins = Math.floor(minutes % 60);
@@ -17,13 +6,18 @@ const formatUptime = minutes => {
 };
 
 const fill = data => {
+  const status = data.ambiente.status || "Normal";
+  const statusPill = document.getElementById("system-status");
+  const statusClass = status.toLowerCase().includes("render") ? "render" : "normal";
+  statusPill.className = `status-pill ${statusClass}`;
+
   document.getElementById("summary-ram").textContent = data.desempenho.memoria.percent;
-  document.getElementById("summary-cpu").textContent = `${Math.round(data.desempenho.cpu_media)}%`;
+  document.getElementById("summary-cpu").textContent = `${data.desempenho.cpu_media}%`;
   document.getElementById("summary-uptime").textContent = data.desempenho.uptime;
   document.getElementById("summary-files").textContent = data.projeto.total_arquivos;
   document.getElementById("summary-ip").textContent = data.rede.ip;
-  document.getElementById("summary-status").textContent = data.ambiente.status;
-  document.getElementById("system-status").textContent = data.ambiente.status;
+  document.getElementById("summary-status").textContent = status;
+  document.getElementById("system-status").textContent = status;
 
   document.getElementById("sys-host").textContent = data.sistema.hostname;
   document.getElementById("sys-platform").textContent = data.sistema.plataforma;
@@ -54,7 +48,7 @@ const fill = data => {
   coresList.innerHTML = "";
   data.desempenho.cpu_usage.forEach((usage, index) => {
     const item = document.createElement("div");
-    item.innerHTML = `<div class=\"stat-row\"><span>Core ${index}</span><strong>${usage}%</strong></div><div class=\"cpu-bar\"><span style=\"width:${usage}%\"></span></div>`;
+    item.innerHTML = `<div class="stat-row"><span>Core ${index}</span><strong>${usage}%</strong></div><div class="cpu-bar"><span style="width:${usage}%"></span></div>`;
     coresList.appendChild(item);
   });
 
@@ -65,7 +59,7 @@ const fill = data => {
   data.rede.interfaces.forEach(net => {
     const div = document.createElement("div");
     div.className = "interface-item";
-    div.innerHTML = `<strong>${net.name}</strong> • ${net.family} • ${net.address}`;
+    div.innerHTML = `<strong>${net.name}</strong> ${net.family} • ${net.address}`;
     interfacesEl.appendChild(div);
   });
 
@@ -86,7 +80,7 @@ const fill = data => {
   document.getElementById("app-mem").textContent = data.aplicacao.memory;
   document.getElementById("app-path").textContent = data.aplicacao.execPath;
 
-  document.getElementById("env-status").textContent = data.ambiente.status;
+  document.getElementById("env-status").textContent = status;
   document.getElementById("env-port").textContent = data.ambiente.porta;
   document.getElementById("env-node").textContent = data.ambiente.modo;
   document.getElementById("env-aws").textContent = data.ambiente.cloud;

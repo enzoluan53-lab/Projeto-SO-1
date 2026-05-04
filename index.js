@@ -68,6 +68,8 @@ app.get("/api", (req, res) => {
   const memory = getMemoryUsage();
   const uptimeMinutes = os.uptime() / 60;
   const loadAvg = os.loadavg();
+  const cpuUsage = cpus.map(() => Math.floor(Math.random() * 41) + 20);
+  const averageCpu = Math.round(cpuUsage.reduce((sum, value) => sum + value, 0) / cpuUsage.length);
 
   const data = {
     sistema: {
@@ -90,8 +92,8 @@ app.get("/api", (req, res) => {
     desempenho: {
       cpu_modelo: cpus[0]?.model || "N/A",
       cpu_cores: cpus.length,
-      cpu_media: Number(loadAvg[0].toFixed(0)),
-      cpu_usage: cpus.map(() => Math.floor(Math.random() * 40) + 20),
+      cpu_media: averageCpu,
+      cpu_usage: cpuUsage,
       load_avg: loadAvg.map(val => val.toFixed(2)),
       memoria: memory,
       uptime: formatUptime(uptimeMinutes)
